@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>jQuery MagicLine Navigation Horizontal</title>
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"
+    ></script>
+
+    <script type="text/javascript">
+      $(function() {
+        var $el,
+          leftPos,
+          topPos,
+          newWidth,
+          $mainNav = $("#example-one"); //Set up variables including current left offset of the navigation
+
+        $mainNav.append("<li id='magic-line'></li>"); //insert the line that will be scrolling accross the menu
+
+        var $magicLine = $("#magic-line");
+
+        $magicLine
+          .width($("li").width())
+          //.height($("li").height())
+          .height(0)
+          .css("left", $("li").position().left)
+
+          .data("newleft", $magicLine.position().left) //save the 'LEFT position' of the current LI
+          .data("newTop", $magicLine.position().top) //save the 'LEFT position' of the current LI
+          .data("newWidth", $magicLine.width()); //save the width of the selected LI
+
+        $("#example-one li a")
+          .mouseenter(function() {
+            $el = $(this);
+            leftPos = $el.position().left;
+            topPos = $el.position().top;
+            newWidth = $el.parent().width();
+            newHeight = $el.parent().height();
+
+            $magicLine.stop().animate({
+              left: leftPos,
+              top: topPos,
+              width: newWidth,
+              height: newHeight
+            });
+
+            $("#example-one li a").css({ color: "black" });
+            $(this).css({ color: "white" });
+          })
+          .mouseleave(function() {});
+      });
+    </script>
+
+    <style type="text/css">
+      #example-one {
+        margin: 0 auto;
+        list-style: none;
+        position: relative;
+        width: 200px;
+        margin: 30px 0 0 0;
+        padding: 0 0 0 100px;
+        border: 1px dotted blue;
+        height: 400px;
+      }
+
+      #example-one li a {
+        color: rgb(14, 12, 12);
+        font-size: 20px;
+        display: block;
+        text-decoration: none;
+        text-transform: uppercase;
+        height: 30px;
+        padding: 10px 0 0 0;
+        text-indent: 20px;
+      }
+
+      #magic-line {
+        position: absolute;
+        left: 0;
+        background: maroon;
+        z-index: -1;
+      }
+
+      #example-one li a:hover {
+        //color: white;
+      }
+    </style>
+
+    <!-- style type="text/css">
+
+  #example-one {
+    margin: 0 auto;
+    list-style: none;
+    position: relative;
+    width: 960px;
+  }
+#example-one li {
+        display: inline;
+      }
+
+      #example-one li a {
+        color: rgb(14, 12, 12);
+        font-size: 14px;
+        display: block;
+        float: left;
+        padding: 6px 10px 4px 10px;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      #magic-line {
+        position: absolute;
+        bottom: -25px;
+        left: 0;
+        width: 100px;
+        height: 2px;
+        background: maroon;
+      }
+    </style -->
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header"></div>
+
+      <div class="nav-wrap">
+        <ul class="group" id="example-one">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Buy Tickets</a></li>
+          <li><a href="#">Group Sales</a></li>
+          <li class="current_page_item"><a href="#">Reviews</a></li>
+          <li><a href="#">The Show</a></li>
+          <li><a href="#">Videos</a></li>
+          <li><a href="#">Photos</a></li>
+          <li><a href="#">Magic Shop</a></li>
+        </ul>
+      </div>
+
+      <div id="content">
+        <!-- h2>The Idea</h2>
+
+        <p>
+          The idea is to have a highlight of some kind (a background or an
+          underline) follow you around as you mouse over the different links in
+          the navigation. This will happen with jQuery and it’s animation
+          abilities. As such, the “magic line” will only be appended via
+          JavaScript. Once added to the list and styled, as you mouse over the
+          different links, it figures out the left positioning and the width and
+          animates to match.
+        </p -->
+      </div>
+      <div id="footer"></div>
+    </div>
+  </body>
+</html>
